@@ -1,17 +1,13 @@
-FROM ubuntu:latest
+FROM node:20
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package.json .
-COPY package-lock.json .
-COPY src
-
+COPY . .
 
 RUN npm install
-RUN npm run build
 RUN npx prisma generate
-
+RUN npm run build
 
 EXPOSE 3000
 
-CMD ["node", "dist/index.js", ]
+CMD ["node", "dist/index.js"]
